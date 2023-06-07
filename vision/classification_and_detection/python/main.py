@@ -44,6 +44,9 @@ SUPPORTED_DATASETS = {
     "imagenet_pytorch":
         (imagenet.Imagenet, dataset.pre_process_imagenet_pytorch, dataset.PostProcessArgMax(offset=0),
          {"image_size": [224, 224, 3]}),
+    "imagenet_pytorch_native":
+        (imagenet.Imagenet, dataset.pre_process_imagenet_pytorch, dataset.PostProcessArgMax(offset=0),
+         {"image_size": [224, 224, 3]}),
     "coco-300":
         (coco.Coco, dataset.pre_process_coco_mobilenet, coco.PostProcessCoco(),
          {"image_size": [300, 300, 3]}),
@@ -100,6 +103,13 @@ SUPPORTED_PROFILES = {
         "outputs": "ArgMax:0",
         "dataset": "imagenet",
         "backend": "tensorflow",
+        "model-name": "resnet50",
+    },
+    "resnet50-pytorch-native": {
+        "inputs": "image",
+        "outputs": "ArgMax:0",
+        "dataset": "imagenet",
+        "backend": "pytorch-native",
         "model-name": "resnet50",
     },
     "resnet50-onnxruntime": {
@@ -336,6 +346,7 @@ class RunnerBase:
         try:
             results = self.model.predict({self.model.inputs[0]: qitem.img})
             processed_results = self.post_process(results, qitem.content_id, qitem.label, self.result_dict)
+            print(processed_results, qitem.label)
             if self.take_accuracy:
                 self.post_process.add_results(processed_results)
             self.result_timing.append(time.time() - qitem.start)

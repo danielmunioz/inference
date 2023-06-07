@@ -24,7 +24,9 @@ class BackendPytorchNative(backend.Backend):
         return "NCHW"
 
     def load(self, model_path, inputs=None, outputs=None):
-        self.model = torch.load(model_path)
+        self.model = torchvision.models.__dict__["resnet50"](pretrained=False)
+        # self.model = torch.load(model_path)
+        self.model.load_state_dict(torch.load(model_path))
         self.model.eval()
         # find inputs from the model if not passed in by config
         if inputs:
@@ -54,4 +56,5 @@ class BackendPytorchNative(backend.Backend):
         feed[key] = torch.tensor(feed[key]).float().to(self.device)
         with torch.no_grad():
             output = self.model(feed[key])
+            output = output[None,]
         return output
