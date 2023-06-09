@@ -47,6 +47,9 @@ SUPPORTED_DATASETS = {
     "imagenet_pytorch_native":
         (imagenet.Imagenet, dataset.pre_process_imagenet_pytorch, dataset.PostProcessArgMax(offset=0),
          {"image_size": [224, 224, 3]}),
+    "imagenet_tf2":
+        (imagenet.Imagenet, dataset.pre_process_imagenet_tf2, dataset.PostProcessArgMax(offset=0),
+         {"image_size": [224, 224, 3]}),
     "coco-300":
         (coco.Coco, dataset.pre_process_coco_mobilenet, coco.PostProcessCoco(),
          {"image_size": [300, 300, 3]}),
@@ -110,6 +113,13 @@ SUPPORTED_PROFILES = {
         "outputs": "ArgMax:0",
         "dataset": "imagenet",
         "backend": "pytorch-native",
+        "model-name": "resnet50",
+    },
+    "resnet50-tf2": {
+        "inputs": "image",
+        "outputs": "ArgMax:0",
+        "dataset": "imagenet",
+        "backend": "tf2",
         "model-name": "resnet50",
     },
     "resnet50-onnxruntime": {
@@ -245,6 +255,7 @@ def get_args():
     parser.add_argument("--accuracy", action="store_true", help="enable accuracy pass")
     parser.add_argument("--find-peak-performance", action="store_true", help="enable finding peak performance pass")
     parser.add_argument("--debug", action="store_true", help="debug, turn traces on")
+    parser.add_argument("--compile_with_ivy", action="store_true", help="whether to compile the model with Ivy")
 
     # file to use mlperf rules compliant parameters
     parser.add_argument("--mlperf_conf", default="../../mlperf.conf", help="mlperf rules config")
@@ -282,7 +293,7 @@ def get_args():
     return args
 
 
-def get_backend(backend):
+def get_backend(backend, compile_with_ivy=False):
     if backend == "tensorflow":
         from backend_tf import BackendTensorflow
         backend = BackendTensorflow()
@@ -300,7 +311,10 @@ def get_backend(backend):
         backend = BackendPytorch()
     elif backend == "pytorch-native":
         from backend_pytorch_native import BackendPytorchNative
-        backend = BackendPytorchNative()      
+        backend = BackendPytorchNative(compile=compile_with_ivy)
+    elif backend == "tf2":
+        from backend_tf2 import BackendTF2
+        backend = BackendTF2(compile=compile_with_ivy)
     elif backend == "tflite":
         from backend_tflite import BackendTflite
         backend = BackendTflite()
@@ -468,7 +482,7 @@ def main():
     log.info(args)
 
     # find backend
-    backend = get_backend(args.backend)
+    backend = get_backend(args.backend, args.compile_with_ivy)
 
      # If TVM, pass max_batchsize to the backend
     if args.backend.startswith('tvm'):

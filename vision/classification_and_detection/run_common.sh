@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -lt 1 ]; then
-    echo "usage: $0 tf|onnxruntime|pytorch|tflite|tvm-onnx|tvm-pytorch [resnet50|mobilenet|ssd-mobilenet|ssd-resnet34|retinanet] [cpu|gpu]"
+    echo "usage: $0 tf|tf2|onnxruntime|pytorch|tflite|tvm-onnx|tvm-pytorch [resnet50|mobilenet|ssd-mobilenet|ssd-resnet34|retinanet] [cpu|gpu]"
     exit 1
 fi
 if [ "x$DATA_DIR" == "x" ]; then
@@ -18,7 +18,7 @@ device="cpu"
 
 for i in $* ; do
     case $i in
-       tf|onnxruntime|tflite|pytorch|tvm-onnx|tvm-pytorch|pytorch-native) backend=$i; shift;;
+       tf|tf2|onnxruntime|tflite|pytorch|tvm-onnx|tvm-pytorch|pytorch-native) backend=$i; shift;;
        cpu|gpu) device=$i; shift;;
        gpu) device=gpu; shift;;
        resnet50|mobilenet|ssd-mobilenet|ssd-resnet34|ssd-resnet34-tf|retinanet) model=$i; shift;;
@@ -38,6 +38,10 @@ extra_args=""
 if [ $name == "resnet50-tf" ] ; then
     model_path="$MODEL_DIR/resnet50_v1.pb"
     profile=resnet50-tf
+fi
+if [ $name == "resnet50-tf2" ] ; then
+    model_path="$MODEL_DIR/resnet50_tf2.pb"
+    profile=resnet50-tf2
 fi
 if [ $name == "mobilenet-tf" ] ; then
     model_path="$MODEL_DIR/mobilenet_v1_1.0_224_frozen.pb"
@@ -107,6 +111,13 @@ fi
 if [ $name == "retinanet-pytorch" ] ; then
     model_path="$MODEL_DIR/resnext50_32x4d_fpn.pth"
     profile=retinanet-pytorch
+fi
+
+## Tensorflow 2
+if [ $name == "resnet50-tf2" ] ; then
+    model_path="$MODEL_DIR/resnet50_tf2.h5"
+    profile=resnet50-tf2
+    extra_args="$extra_args --backend tf2"
 fi
 
 

@@ -10,6 +10,7 @@ import time
 
 import cv2
 import numpy as np
+import tensorflow as tf
 
 
 logging.basicConfig(level=logging.INFO)
@@ -217,6 +218,24 @@ def pre_process_imagenet_pytorch(img, dims=None, need_transpose=False):
     img = np.asarray(img, dtype='float32')
     return img
 
+def pre_process_imagenet_tf2(img, dims=None, need_transpose=False):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+    output_height, output_width, _ = dims
+    cv2_interpol = cv2.INTER_AREA
+    img = resize_with_aspectratio(img, output_height, output_width, inter_pol=cv2_interpol)
+    img = center_crop(img, output_height, output_width)
+    img = np.asarray(img, dtype='float32')
+
+    # normalize image
+    means = np.array([0.485, 0.456, 0.406], dtype=np.float32)
+
+    img -= means
+    img = tf.keras.applications.resnet50.preprocess_input(img)
+    # transpose if needed
+    if need_transpose:
+        img = img.transpose([2, 0, 1])
+    return img
 
 def maybe_resize(img, dims):
     img = np.array(img, dtype=np.float32)

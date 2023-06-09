@@ -8,8 +8,9 @@ import backend
 
 
 class BackendPytorchNative(backend.Backend):
-    def __init__(self):
+    def __init__(self, compile=False):
         super(BackendPytorchNative, self).__init__()
+        self.compile = compile
         self.sess = None
         self.model = None
         self.device = "cuda:0" if torch.cuda.is_available() else "cpu"
@@ -25,9 +26,15 @@ class BackendPytorchNative(backend.Backend):
 
     def load(self, model_path, inputs=None, outputs=None):
         self.model = torchvision.models.__dict__["resnet50"](pretrained=False)
-        # self.model = torch.load(model_path)
         self.model.load_state_dict(torch.load(model_path))
         self.model.eval()
+        self.model = self.model.to(self.device)
+        if self.compile:
+            import ivy
+            ivy.set_backend("torch")
+            noise = torch.randn(1, 3, 224, 224)
+            print("[+]Compiling PyTorch model with Ivy...")
+            self.model = ivy.compile(self.model, args=(noise,))
         # find inputs from the model if not passed in by config
         if inputs:
             self.inputs = inputs
@@ -48,7 +55,6 @@ class BackendPytorchNative(backend.Backend):
                 self.outputs.append(i.name)
 
         # prepare the backend
-        self.model = self.model.to(self.device)
         return self
 
     def predict(self, feed):

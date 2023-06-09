@@ -88,6 +88,8 @@ class Imagenet(dataset.Dataset):
         futures = [executor.submit(self.process, data_path, item, image_lists[lists.index(item)],
             label_lists[lists.index(item)]) for item in lists]
         concurrent.futures.wait(futures)
+        # for item in lists:
+        #     self.process(data_path, item, image_lists[lists.index(item)], label_lists[lists.index(item)])
         for i in range (len(image_lists)):
             self.image_list += image_lists[i]
             self.label_list += label_lists[i]
@@ -118,11 +120,11 @@ class Imagenet(dataset.Dataset):
                     continue
                 os.makedirs(os.path.dirname(os.path.join(self.cache_dir, image_name)), exist_ok=True)
                 dst = os.path.join(self.cache_dir, image_name)
-                if not os.path.exists(dst + ".npy"):
-                    # cache a preprocessed version of the image
-                    img_org = cv2.imread(src)
-                    processed = self.pre_process(img_org, need_transpose=self.need_transpose, dims=self.image_size)
-                    np.save(dst, processed)
+                # if not os.path.exists(dst + ".npy"):
+                # cache a preprocessed version of the image
+                img_org = cv2.imread(src)
+                processed = self.pre_process(img_org, need_transpose=self.need_transpose, dims=self.image_size)
+                np.save(dst, processed)
             image_list.append(image_name)
             label_list.append(int(label))
 
