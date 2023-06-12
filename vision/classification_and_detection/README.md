@@ -55,7 +55,7 @@ Similary the tensorflow2 benchmark could be run using(add `--compile_with_ivy` f
 
 ```bash
 ./run_local.sh tf2 resnet50 cpu --dataset imagenet_tf2 --accuracy
-``
+```
 
 
 ### Usage
