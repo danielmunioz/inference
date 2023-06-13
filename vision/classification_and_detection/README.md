@@ -63,10 +63,10 @@ Similary the tensorflow2 benchmark could be run using(add `--compile_with_ivy` f
 
     ./run_local.sh tf2 resnet50 cpu --dataset imagenet_tf2
 
-Note: If you face any issue with installing loadgen package, run the following commands and try re-installing the package again:
+Note: If you face any issue with installing loadgen package, run the following commands and try re-installing the package again(for python 3.10):
 
-    sudo apt install python3-dev -y
-    python3-config --includes
+    sudo apt install python3.10-dev -y
+    python3.10-config --includes
 
 Run the following lines, if you face any issue with cmake:
 
