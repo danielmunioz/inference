@@ -19,7 +19,7 @@ This is the reference implementation for MLPerf Inference Classification benchma
 3. Move to the classification directory(that is, the directory where this readme resides)
 
     ```bash
-    cd ./inference/vision/classification_and_detection
+    cd ./vision/classification_and_detection
     ```
 
 4. Run the setup script, the script will automatically download imagenet validation set, create fake imagenet dataset(for experimentation), download the models, and also install all the required modules including ivy.
