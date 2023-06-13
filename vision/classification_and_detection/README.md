@@ -4,6 +4,8 @@ This is the reference implementation for MLPerf Inference Classification benchma
 
 ### Setting up and running the benchmark
 
+(Tested on Ubuntu 22.04(LTS) with python 3.10)
+
 1. Clone the repository(must include submodules while cloning, to avoid errors in future steps)
 
     ```bash
