@@ -2,7 +2,7 @@ chmod +x *.sh
 
 bash tools/make_fake_imagenet.sh
 ./download_imagenet.sh
-wget https://github.com/mlcommons/inference_results_v2.1/blob/dbfc2a9129f3324fa5cca5c03673dbef6b44dd79/closed/Intel/code/resnet50/pytorch-cpu/val_data/val_map.txt -O ILSVRC2012_img_val/val_map.txt
+wget --no-check-certificate https://github.com/mlcommons/inference_results_v2.1/raw/master/closed/Intel/code/resnet50/pytorch-cpu/val_data/val_map.txt -O ILSVRC2012_img_val/val_map.txt
 
 mkdir models
 wget --no-check-certificate https://zenodo.org/record/2535873/files/resnet50_v1.pb -O models/resnet50_v1.pb
