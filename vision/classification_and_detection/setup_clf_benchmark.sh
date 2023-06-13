@@ -2,7 +2,7 @@ chmod +x *.sh
 
 bash tools/make_fake_imagenet.sh
 ./download_imagenet.sh
-wget https://github.com/doonny/PipeCNN/blob/392692b86747096e4324098deb38d8e93159809e/project_intel/data/imagenet/val.txt -O ILSVRC2012_img_val/val.txt
+wget https://github.com/doonny/PipeCNN/blob/392692b86747096e4324098deb38d8e93159809e/project_intel/data/imagenet/val.txt -O ILSVRC2012_img_val/val_map.txt
 
 mkdir models
 wget --no-check-certificate https://zenodo.org/record/2535873/files/resnet50_v1.pb -O models/resnet50_v1.pb
