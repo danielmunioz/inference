@@ -47,7 +47,7 @@ This is the reference implementation for MLPerf Inference Classification benchma
     export MODEL_DIR=models
     ```
 
-7. Get the api key for ivy compiler and place it in `.ivy/key.pem` file in this directory(i.e, `classification_and_detection`).
+7. Get the api key for ivy compiler and place it in `.ivy/key.pem` file in `inference/vision/classification_and_detection` directory.
 
 8. Run the benchmark with pytorch backend using the below command:
 
