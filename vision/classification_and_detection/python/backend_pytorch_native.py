@@ -32,7 +32,7 @@ class BackendPytorchNative(backend.Backend):
         if self.compile:
             import ivy
             ivy.set_backend("torch")
-            noise = torch.randn(1, 3, 224, 224)
+            noise = torch.randn(1, 3, 224, 224, device=self.device)
             print("[+]Compiling PyTorch model with Ivy...")
             self.model = ivy.compile(self.model, args=(noise,))
         # find inputs from the model if not passed in by config
