@@ -52,7 +52,7 @@ export MODEL_DIR=models
 8. Run the benchmark with pytorch backend using the below command:
 
 ```bash
-./run_local.sh pytorch-native resnet50 cpu --dataset imagenet_pytorch_native --profile resnet50-pytorch-native --accuracy --data-format NCHW
+./run_local.sh pytorch-native resnet50 cpu --dataset imagenet_pytorch_native --profile resnet50-pytorch-native --data-format NCHW
 ```
 
 If you wish to run the benchmark with Ivy compiled pytorch model, add `--compile_with_ivy` flag to above command.
@@ -60,7 +60,7 @@ If you wish to run the benchmark with Ivy compiled pytorch model, add `--compile
 Similary the tensorflow2 benchmark could be run using(add `--compile_with_ivy` flag if required):
 
 ```bash
-./run_local.sh tf2 resnet50 cpu --dataset imagenet_tf2 --accuracy
+./run_local.sh tf2 resnet50 cpu --dataset imagenet_tf2
 ```
 
 
