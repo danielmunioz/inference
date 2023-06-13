@@ -31,13 +31,13 @@ This is the reference implementation for MLPerf Inference Classification benchma
 
 5. The above script will create separate directories for original imagenet and fake imagenet. You can set the data directory for the benchmark as per you needs(i.e, either imagenet or fake imagenet):
 
+    Run this command if you wish to use fake imagenet dataset for the benchmarking:
     ```bash
-    # run this command if you wish to use fake imagenet
     export DATA_DIR=fake_imagenet
+    ```
+   Or use this command if you wish to use the imagenet dataset:
 
-    ######### OR
-
-    # run this command if you wish to use the imagenet dataset
+    ```bash
     export DATA_DIR=ILSVRC2012_img_val
     ```
 
