@@ -61,6 +61,6 @@ class BackendPytorchNative(backend.Backend):
         key = [key for key in feed.keys()][0]
         feed[key] = torch.tensor(feed[key]).float().to(self.device)
         with torch.no_grad():
-            output = self.model(feed[key])
+            output = self.model(feed[key]).cpu()
             output = output[None,]
         return output
