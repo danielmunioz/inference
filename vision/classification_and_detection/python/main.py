@@ -360,7 +360,6 @@ class RunnerBase:
         try:
             results = self.model.predict({self.model.inputs[0]: qitem.img})
             processed_results = self.post_process(results, qitem.content_id, qitem.label, self.result_dict)
-            print(processed_results, qitem.label)
             if self.take_accuracy:
                 self.post_process.add_results(processed_results)
             self.result_timing.append(time.time() - qitem.start)
