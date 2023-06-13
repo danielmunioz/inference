@@ -2,7 +2,7 @@
 
 This is the reference implementation for MLPerf Inference Classification benchmark
 
-### Setting up
+### Setting up and running the benchmark
 
 1. Clone the repository(must include submodules while cloning, to avoid errors in future steps)
 
@@ -10,20 +10,26 @@ This is the reference implementation for MLPerf Inference Classification benchma
 git clone --recurse-submodules https://github.com/bipinKrishnan/inference.git
 ```
 
-2. Move to the classification directory(that is, the directory where this readme resides)
+2. Change directory to the repo and switch to `ivy_resnet_clf` branch:
+
+```bash
+cd inference && git checkout ivy_resnet_clf
+```
+
+3. Move to the classification directory(that is, the directory where this readme resides)
 
 ```bash
 cd ./inference/vision/classification_and_detection
 ```
 
-3. Run the setup script, the script will automatically download imagenet validation set, create fake imagenet dataset(for experimentation), download the models, and also install all the required modules including ivy.
+4. Run the setup script, the script will automatically download imagenet validation set, create fake imagenet dataset(for experimentation), download the models, and also install all the required modules including ivy.
 
 ```bash
 chmod +x setup_clf_benchmark.sh
 ./setup_clf_benchmark.sh
 ```
 
-4. The above script will create separate directories for original imagenet and fake imagenet. You can set the data directory for the benchmark as per you needs(i.e, either imagenet or fake imagenet):
+5. The above script will create separate directories for original imagenet and fake imagenet. You can set the data directory for the benchmark as per you needs(i.e, either imagenet or fake imagenet):
 
 ```bash
 # run this command if you wish to use fake imagenet
@@ -35,15 +41,15 @@ export DATA_DIR=fake_imagenet
 export DATA_DIR=ILSVRC2012_img_val
 ```
 
-5. Set model directory variable(all the downloaded models are stored in `models` folder):
+6. Set model directory variable(all the downloaded models are stored in `models` folder):
 
 ```bash
 export MODEL_DIR=models
 ```
 
-6. Get the api key for ivy compiler and place it in `.ivy/key.pem` file in this directory(i.e, `classification_and_detection`).
+7. Get the api key for ivy compiler and place it in `.ivy/key.pem` file in this directory(i.e, `classification_and_detection`).
 
-7. Run the benchmark with pytorch backend using the below command:
+8. Run the benchmark with pytorch backend using the below command:
 
 ```bash
 ./run_local.sh pytorch-native resnet50 cpu --dataset imagenet_pytorch_native --profile resnet50-pytorch-native --accuracy --data-format NCHW
