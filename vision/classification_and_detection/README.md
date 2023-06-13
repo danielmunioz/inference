@@ -6,62 +6,62 @@ This is the reference implementation for MLPerf Inference Classification benchma
 
 1. Clone the repository(must include submodules while cloning, to avoid errors in future steps)
 
-```bash
-git clone --recurse-submodules https://github.com/bipinKrishnan/inference.git
-```
+    ```bash
+    git clone --recurse-submodules https://github.com/bipinKrishnan/inference.git
+    ```
 
 2. Change directory to the repo and switch to `ivy_resnet_clf` branch:
 
-```bash
-cd inference && git checkout ivy_resnet_clf
-```
+    ```bash
+    cd inference && git checkout ivy_resnet_clf
+    ```
 
 3. Move to the classification directory(that is, the directory where this readme resides)
 
-```bash
-cd ./inference/vision/classification_and_detection
-```
+    ```bash
+    cd ./inference/vision/classification_and_detection
+    ```
 
 4. Run the setup script, the script will automatically download imagenet validation set, create fake imagenet dataset(for experimentation), download the models, and also install all the required modules including ivy.
 
-```bash
-chmod +x setup_clf_benchmark.sh
-./setup_clf_benchmark.sh
-```
+    ```bash
+    chmod +x setup_clf_benchmark.sh
+    ./setup_clf_benchmark.sh
+    ```
 
 5. The above script will create separate directories for original imagenet and fake imagenet. You can set the data directory for the benchmark as per you needs(i.e, either imagenet or fake imagenet):
 
-```bash
-# run this command if you wish to use fake imagenet
-export DATA_DIR=fake_imagenet
+    ```bash
+    # run this command if you wish to use fake imagenet
+    export DATA_DIR=fake_imagenet
 
-######### OR
+    ######### OR
 
-# run this command if you wish to use the imagenet dataset
-export DATA_DIR=ILSVRC2012_img_val
-```
+    # run this command if you wish to use the imagenet dataset
+    export DATA_DIR=ILSVRC2012_img_val
+    ```
 
 6. Set model directory variable(all the downloaded models are stored in `models` folder):
 
-```bash
-export MODEL_DIR=models
-```
+    ```bash
+    export MODEL_DIR=models
+    ```
 
 7. Get the api key for ivy compiler and place it in `.ivy/key.pem` file in this directory(i.e, `classification_and_detection`).
 
 8. Run the benchmark with pytorch backend using the below command:
 
-```bash
-./run_local.sh pytorch-native resnet50 cpu --dataset imagenet_pytorch_native --profile resnet50-pytorch-native --data-format NCHW
-```
+    ```bash
+    ./run_local.sh pytorch-native resnet50 cpu --dataset imagenet_pytorch_native --profile resnet50-pytorch-native --data-format NCHW
+    ```
 
 If you wish to run the benchmark with Ivy compiled pytorch model, add `--compile_with_ivy` flag to above command.
 
 Similary the tensorflow2 benchmark could be run using(add `--compile_with_ivy` flag if required):
 
-```bash
-./run_local.sh tf2 resnet50 cpu --dataset imagenet_tf2
-```
+    ```bash
+    ./run_local.sh tf2 resnet50 cpu --dataset imagenet_tf2
+    ```
 
 
 ### Usage
