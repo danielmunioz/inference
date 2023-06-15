@@ -9,7 +9,7 @@ This is the reference implementation for MLPerf Inference Classification benchma
 1. Clone the repository(must include submodules while cloning, to avoid errors in future steps)
 
     ```bash
-    git clone --recurse-submodules https://github.com/bipinKrishnan/inference.git
+    git clone --recurse-submodules https://github.com/unifyai/inference.git
     ```
 
 2. Change directory to the repo and switch to `ivy_resnet_clf` branch:
