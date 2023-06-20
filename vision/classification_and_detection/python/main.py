@@ -16,6 +16,7 @@ import sys
 import threading
 import time
 from queue import Queue
+from functools import partial
 
 import mlperf_loadgen as lg
 import numpy as np
@@ -45,6 +46,9 @@ SUPPORTED_DATASETS = {
         (imagenet.Imagenet, dataset.pre_process_imagenet_pytorch, dataset.PostProcessArgMax(offset=0),
          {"image_size": [224, 224, 3]}),
     "imagenet_pytorch_native":
+        (imagenet.Imagenet, dataset.pre_process_imagenet_pytorch, dataset.PostProcessArgMax(offset=0),
+         {"image_size": [224, 224, 3]}),
+    "imagenet_torch2jax":
         (imagenet.Imagenet, dataset.pre_process_imagenet_pytorch, dataset.PostProcessArgMax(offset=0),
          {"image_size": [224, 224, 3]}),
     "imagenet_tf2":
@@ -113,6 +117,13 @@ SUPPORTED_PROFILES = {
         "outputs": "ArgMax:0",
         "dataset": "imagenet",
         "backend": "pytorch-native",
+        "model-name": "resnet50",
+    },
+    "resnet50-torch2jax": {
+        "inputs": "image",
+        "outputs": "ArgMax:0",
+        "dataset": "imagenet",
+        "backend": "torch2jax",
         "model-name": "resnet50",
     },
     "resnet50-tf2": {
@@ -312,6 +323,9 @@ def get_backend(backend, compile_with_ivy=False):
     elif backend == "pytorch-native":
         from backend_pytorch_native import BackendPytorchNative
         backend = BackendPytorchNative(compile=compile_with_ivy)
+    elif backend == "torch2jax":
+        from backend_torch2jax import BackendTorch2Jax
+        backend = BackendTorch2Jax()
     elif backend == "tf2":
         from backend_tf2 import BackendTF2
         backend = BackendTF2(compile=compile_with_ivy)

@@ -84,12 +84,12 @@ class Imagenet(dataset.Dataset):
                 lists.append([ next(f) for x in range(int(CNT%N)) ])
                 image_lists.append([])
                 label_lists.append([])
-        executor = concurrent.futures.ThreadPoolExecutor(N)
-        futures = [executor.submit(self.process, data_path, item, image_lists[lists.index(item)],
-            label_lists[lists.index(item)]) for item in lists]
-        concurrent.futures.wait(futures)
-        # for item in lists:
-        #     self.process(data_path, item, image_lists[lists.index(item)], label_lists[lists.index(item)])
+        # executor = concurrent.futures.ThreadPoolExecutor(N)
+        # futures = [executor.submit(self.process, data_path, item, image_lists[lists.index(item)],
+        #     label_lists[lists.index(item)]) for item in lists]
+        # concurrent.futures.wait(futures)
+        for item in lists:
+            self.process(data_path, item, image_lists[lists.index(item)], label_lists[lists.index(item)])
         for i in range (len(image_lists)):
             self.image_list += image_lists[i]
             self.label_list += label_lists[i]

@@ -2,7 +2,7 @@
 pytoch native backend 
 """
 # pylint: disable=unused-argument,missing-docstring
-import torch  # currently supports pytorch1.0
+import torch
 import torchvision
 import backend
 

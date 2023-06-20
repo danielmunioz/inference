@@ -18,7 +18,7 @@ device="cpu"
 
 for i in $* ; do
     case $i in
-       tf|tf2|onnxruntime|tflite|pytorch|tvm-onnx|tvm-pytorch|pytorch-native) backend=$i; shift;;
+       tf|tf2|onnxruntime|tflite|pytorch|tvm-onnx|tvm-pytorch|pytorch-native|torch2jax) backend=$i; shift;;
        cpu|gpu) device=$i; shift;;
        gpu) device=gpu; shift;;
        resnet50|mobilenet|ssd-mobilenet|ssd-resnet34|ssd-resnet34-tf|retinanet) model=$i; shift;;
@@ -151,6 +151,15 @@ if [ $name == "resnet50-tvm-pytorch" ] ; then
     model_path="$MODEL_DIR/resnet50_INT8bit_quantized.pt"
     profile=resnet50-onnxruntime
     extra_args="$extra_args --backend tvm"
+fi
+
+#
+# torch to jax transpilation with ivy
+#
+if [ $name == "resnet50-torch2jax" ] ; then
+    model_path="$MODEL_DIR/resnet50-19c8e357.pth"
+    profile=resnet50-torch2jax
+    extra_args="$extra_args --backend torch2jax"
 fi
 
 name="$backend-$device/$model"
