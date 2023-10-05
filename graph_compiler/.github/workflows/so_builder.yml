@@ -1,0 +1,53 @@
+name: Deploy Compiler
+on: 
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    # Only trigger the workflow when the enable_build flag is set
+    if: contains(github.event.head_commit.message, 'temp_build')
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8.10
+
+    - name: Build
+      env:
+        GIT_TOKEN: ${{ secrets.TOKEN_KEY }}
+      run: |
+        cd combined_source/
+        pip3 install cython
+        cd utils
+        python3 setup.py build_ext --inplace
+        bash clean.sh
+        cd .. 
+        cython _compiler.pyx --embed -3 --no-docstrings
+        python3 setup.py build_ext --inplace
+        git clone https://$GIT_TOKEN@github.com/vaatsalya123/ivy.git
+        bash utils/clean.sh
+        mv "_compiler.cp38-win_amd64.pyd" "ivy/ivy/compiler/_compiler.pyd"
+        rm -r ivy/ivy/compiler/utils/
+        mv "utils" "ivy/ivy/compiler/utils"
+        
+    - name: Push
+      env:
+        GIT_TOKEN: ${{ secrets.TOKEN_KEY }}
+      run: |
+        git config user.email "shrivastavavaatsalya@gmail.com"
+        git config user.name "vaatsalya123"
+        git config credential.helper store
+        git config --local http.extraheader "Authorization: Bearer ${{ secrets.TOKEN_KEY }}"
+        git config --global push.default current
+        cd combined_source/ivy/ivy/compiler
+        git add "_compiler.pyd"
+        git add "utils/*.pyd"
+        git commit -am "Update compile win"
+        git push

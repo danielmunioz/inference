@@ -1,0 +1,10 @@
+poe-api
+tempmail-lol
+dill
+tqdm
+argparse
+astunparse
+PyGithub
+gspread
+gspread-formatting
+pandas

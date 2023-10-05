@@ -1,0 +1,61 @@
+name: Deploy Compiler
+on: 
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    # Only trigger the workflow when the enable_build flag is set
+    if: contains(github.event.head_commit.message, 'enable_build')
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10.6
+
+    - name: Install dependencies
+      run: |
+        pip3 install cython
+        #ToDo add cache for this
+        sudo apt-get install -y clang
+    - name: Build
+      env:
+        GIT_TOKEN: ${{ secrets.TOKEN_KEY }}
+      run: |
+        cd graph_compiler/
+        bash ../combined_source/move_files.sh
+        python3 ../combined_source/infuser.py # first instance run
+        python3 ../combined_source/infuser.py # second instance run
+        CC=clang python3 ../combined_source/utils/setup.py build_ext --inplace
+        bash ../combined_source/utils/clean.sh
+        cd ../combined_source
+        cython _compiler.pyx --embed -3 --no-docstrings
+        CC=clang python3 setup.py build_ext --inplace
+        git clone https://$GIT_TOKEN@github.com/vaatsalya123/ivy.git
+        #bash utils/clean.sh
+        mv "_compiler.cpython-310-x86_64-linux-gnu.so" "ivy/ivy/compiler/_compiler.so"
+        rm -r ivy/ivy/compiler/utils/
+        cd ..
+        cd graph_compiler/
+        file *.so
+        mkdir ../combined_source/ivy/ivy/compiler/utils/
+        mv *.so ../combined_source/ivy/ivy/compiler/utils/
+        
+    - name: Push
+      run: |
+        git config --global user.email "shrivastavavaatsalya@gmail.com"
+        git config --global user.name "vaatsalya123"
+        cd combined_source/ivy/ivy/compiler
+        git add "_compiler.so"
+        git add "utils/*.so"
+        git commit -m "Update compiler"
+        git push
+    - name: Test 
+      run: |
+       # ToDo add cythonized tests to check compilation

@@ -1,0 +1,30 @@
+task,model_name,batch_size,timing
+text-to-image,DeepFloyd/IF-I-M-v1.0,1,Model Building Failed
+image-to-text,nlpconnect/vit-gpt2-image-captioning,1,Model Building Failed
+image-to-text,Salesforce/blip-image-captioning-base,1,Compilation Failed. Type: ValueError
+text-to-video,Diangle/clip4clip-webvid,1,Compilation Failed. Type: ValueError
+visual-question-answering,dandelin/vilt-b32-finetuned-vqa,1,Compilation Failed. Type: ValueError
+document-question-answering,magorshunov/layoutlm-invoices,1,Compilation Failed. Type: RuntimeError
+depth-estimation,Intel/dpt-large,1,Terminated
+depth-estimation,Intel/dpt-large,2,Terminated
+image-classification,timm/vit_large_patch14_clip_224.openai_ft_in12k_in1k,1,Model Building Failed
+image-classification,timm/vit_large_patch14_clip_224.openai_ft_in12k_in1k,1,Model Building Failed
+object-detection,hustvl/yolos-tiny,1,Model Building Failed
+object-detection,facebook/detr-resnet-50,1,Model Building Failed
+image-segmentation,CIDAS/clipseg-rd64-refined,1,Compilation Failed. Type: ValueError
+image-segmentation,facebook/mask2former-swin-large-cityscapes-semantic,1,Transpilation to torch Failed. Type: IvyException
+image-to-image,caidas/swin2SR-classical-sr-x2-64,1,Terminated
+image-to-image,caidas/swin2SR-classical-sr-x2-64,2,Terminatedobject-detection,hustvl/yolos-tiny ,1,Model Building Failed
+object-detection,hustvl/yolos-tiny ,1,Model Building Failed
+unconditional-image-generation,google/ddpm-cifar10-32,1,Model Building Failed
+video-classification,microsoft/xclip-base-patch32,1,Compilation Failed. Type: AttributeError
+video-classification,MCG-NJU/videomae-base,1,Compilation Failed. Type: ValueError
+zero-shot-image-classification,openai/clip-vit-base-patch32,1,Compilation Failed. Type: ValueError
+text-classification,nlptown/bert-base-multilingual-uncased-sentiment,50,Terminatedtable-question-answering,google/tapas-base-finetuned-wtq,1,Compilation Failed. Type: TypeError
+table-question-answering,google/tapas-base-finetuned-wtq,1,Compilation Failed. Type: TypeError
+zero-shot-classification,alexandrainst/scandi-nli-large,1,Terminatedtranslation,t5-base,1,Compilation Failed. Type: ValueError
+translation,t5-base,1,Compilation Failed. Type: ValueError
+translation,Helsinki-NLP/opus-mt-zh-en,1,Compilation Failed. Type: ValueError
+summarization,t5-small,1,Compilation Failed. Type: ValueError
+conversational,PygmalionAI/pygmalion-6b,1,Terminated
+conversational,PygmalionAI/pygmalion-6b,50,Terminated

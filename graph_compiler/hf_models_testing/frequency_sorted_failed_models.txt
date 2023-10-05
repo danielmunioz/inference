@@ -1,0 +1,138 @@
+task,model, batch_size, timing
+feature-extraction,facebook/bart-large,1,Transpilation to torch Failed. Type: IvyBackendException
+feature-extraction,rinna/japanese-hubert-base,1,Compilation Failed. Type: AssertionError
+feature-extraction,microsoft/wavlm-large,1,Compilation Failed. Type: AssertionError
+feature-extraction,facebook/hubert-large-ll60k,1,Compilation Failed. Type: AssertionError
+feature-extraction,facebook/bart-base,1,Transpilation to torch Failed. Type: IvyBackendException
+feature-extraction,hf-internal-testing/tiny-random-BlenderbotModel,1,Compilation Failed. Type: ValueError
+feature-extraction,google/vit-base-patch16-224-in21k,1,Compilation Failed. Type: AssertionError
+feature-extraction,m3hrdadfi/distilbert-zwnj-wnli-mean-tokens,1,Compilation Failed. Type: IvyBackendException
+feature-extraction,hf-internal-testing/tiny-random-DistilBertModel,1,Compilation Failed. Type: IvyBackendException
+feature-extraction,hf-internal-testing/tiny-random-ElectraModel,1,Compilation Failed. Type: IvyBackendException
+feature-extraction,hf-internal-testing/tiny-random-BloomModel,1,Transpilation to torch Failed. Type: IvyException
+feature-extraction,hf-internal-testing/tiny-random-RoFormerModel,1,Compilation Failed. Type: IvyBackendException
+feature-extraction,hf-internal-testing/tiny-random-DebertaV2Model,1,Compilation Failed. Type: IvyBackendException
+feature-extraction,hf-internal-testing/tiny-random-PegasusModel,1,Compilation Failed. Type: ValueError
+feature-extraction,hf-internal-testing/tiny-random-MobileBertModel,1,Transpilation to torch Failed. Type: IvyBackendException
+feature-extraction,GanymedeNil/text2vec-large-chinese,50,Benchmarking Failed,Terminated
+feature-extraction,hf-internal-testing/tiny-random-DebertaModel,1,Transpilation to torch Failed. Type: IvyBackendException
+feature-extraction,hf-internal-testing/tiny-random-DebertaModel,1,Transpilation to torch Failed. Type: IvyBackendException
+feature-extraction,lewtun/tiny-random-mt5,1,Compilation Failed. Type: ValueError
+feature-extraction,hf-internal-testing/tiny-random-SqueezeBertModel,1,Transpilation to torch Failed. Type: IvyBackendException
+feature-extraction,hf-internal-testing/tiny-random-IBertModel,1,Transpilation to torch Failed. Type: RuntimeError
+feature-extraction,hkunlp/instructor-xl,1,Building Inputs,Terminated
+feature-extraction,princeton-nlp/sup-simcse-roberta-large,50,Benchmarking Failed,Terminated
+feature-extraction,hf-internal-testing/tiny-random-Speech2TextModel,1,Compilation Failed. Type: AssertionError
+feature-extraction,hf-internal-testing/tiny-random-SegformerModel,1,Compilation Failed. Type: AssertionError
+feature-extraction,hf-internal-testing/tiny-random-NystromformerModel,1,Compilation Failed. Type: IvyBackendException
+feature-extraction,hf-internal-testing/tiny-random-LongT5Model,1,Compilation Failed. Type: ValueError
+feature-extraction,hf-internal-testing/tiny-random-Data2VecAudioModel,1,Compilation Failed. Type: AssertionError
+feature-extraction,facebook/hubert-base-ls960,1,Compilation Failed. Type: AssertionError
+feature-extraction,facebook/dpr-question_encoder-single-nq-base,1,Compilation Failed. Type: IvyBackendException
+feature-extraction,hf-internal-testing/tiny-random-SwinModel,1,Compilation Failed. Type: AssertionError
+text-to-image,DeepFloyd/IF-I-XL-v1.0,1,Model Building Failed
+text-to-image,DeepFloyd/IF-I-M-v1.0,1,Model Building Failed
+text-to-image,DeepFloyd/IF-II-L-v1.0,1,Model Building Failed
+image-to-text,nlpconnect/vit-gpt2-image-captioning,1,Model Building Failed
+image-to-text,Salesforce/blip-image-captioning-base,1,Compilation Failed. Type: ValueError
+text-to-video,Diangle/clip4clip-webvid,1,Compilation Failed. Type: ValueError
+visual-question-answering,dandelin/vilt-b32-finetuned-vqa,1,Compilation Failed. Type: ValueError
+document-question-answering,impira/layoutlm-document-qa,1,Compilation Failed. Type: RuntimeError
+depth-estimation,Intel/dpt-large,1,Transpilation to torch Failed,Terminated
+image-classification,timm/vit_large_patch14_clip_224.openai_ft_in12k_in1k,1,Model Building Failed
+image-classification,timm/nf_resnet50.ra2_in1k,1,Model Building Failed
+image-classification,timm/resnet50.a1_in1k,1,Model Building Failed
+image-classification,timm/eva02_base_patch14_224.mim_in22k,1,Model Building Failed
+image-classification,timm/efficientnet_b0.ra_in1k,1,Model Building Failed
+image-classification,timm/vit_base_patch16_224.augreg_in21k,1,Model Building Failed
+image-classification,timm/resnet18.a1_in1k,1,Model Building Failed
+image-classification,timm/vit_base_patch16_224.augreg2_in21k_ft_in1k,1,Model Building Failed
+image-classification,timm/hrnet_w18.ms_aug_in1k,1,Model Building Failed
+image-classification,timm/convnext_xlarge.fb_in22k_ft_in1k_384,1,Model Building Failed
+image-classification,timm/nfnet_l0.ra2_in1k,1,Model Building Failed
+image-classification,timm/vit_small_patch14_dinov2.lvd142m,1,Model Building Failed
+image-classification,timm/vit_base_patch8_224.augreg2_in21k_ft_in1k,1,Model Building Failed
+image-classification,timm/tf_efficientnet_b0.ns_jft_in1k,1,Model Building Failed
+image-classification,timm/swin_base_patch4_window7_224.ms_in22k_ft_in1k,1,Model Building Failed
+image-classification,timm/mobilenetv3_large_100.ra_in1k,1,Model Building Failed
+image-classification,timm/convnext_base.fb_in22k_ft_in1k,1,Model Building Failed
+image-classification,timm/efficientnet_b3.ra2_in1k,1,Model Building Failed
+image-classification,timm/mixer_b16_224.goog_in21k_ft_in1k,1,Model Building Failed
+image-classification,timm/convmixer_768_32.in1k,1,Model Building Failed
+image-classification,timm/resmlp_12_224.fb_in1k,1,Model Building Failed
+image-classification,timm/mobilenetv2_100.ra_in1k,1,Model Building Failed
+image-classification,timm/beit_base_patch16_224.in22k_ft_in22k_in1k,1,Model Building Failed
+image-classification,timm/inception_v3.tv_in1k,1,Model Building Failed
+image-classification,timm/resnest101e.in1k,1,Model Building Failed
+image-classification,timm/cspdarknet53.ra_in1k,1,Model Building Failed
+object-detection,hustvl/yolos-tiny,1,Compilation Failed.Terminated
+object-detection,facebook/detr-resnet-50,1,Model Building Failed
+object-detection,hustvl/yolos-small,1,Transpilation to Jax Failed,Terminated
+object-detection,google/owlvit-base-patch32,1,Compilation Failed. Type: AttributeError
+object-detection,microsoft/table-transformer-detection,1,Model Building Failed
+image-segmentation,CIDAS/clipseg-rd64-refined,1,Compilation Failed. Type: ValueError
+image-segmentation,facebook/mask2former-swin-large-cityscapes-semantic,1,Transpilation to torch Failed. Type: IvyException
+image-segmentation,openmmlab/upernet-convnext-small,1,Model Building Failed
+image-to-image,caidas/swin2SR-classical-sr-x2-64,1,Transpilation to torch Failed,Terminated
+unconditional-image-generation,google/ddpm-cifar10-32,1,Model Building Failed
+unconditional-image-generation,google/ddpm-ema-celebahq-256,1,Model Building Failed
+unconditional-image-generation,google/ddpm-cat-256,1,Model Building Failed
+unconditional-image-generation,google/ddpm-celebahq-256,1,Model Building Failed
+unconditional-image-generation,CompVis/ldm-celebahq-256,1,Model Building Failed
+unconditional-image-generation,google/ddpm-ema-bedroom-256,1,Model Building Failed
+unconditional-image-generation,google/ddpm-ema-church-256,1,Model Building Failed
+unconditional-image-generation,google/ddpm-church-256,1,Model Building Failed
+video-classification,microsoft/xclip-base-patch32,1,Compilation Failed. Type: AttributeError
+video-classification,MCG-NJU/videomae-base-finetuned-kinetics,1,Compilation Failed. Type: ValueError
+zero-shot-image-classification,openai/clip-vit-large-patch14,1,Compilation Failed. Type: ValueError
+text-to-speech,microsoft/speecht5_tts,1,Compilation Failed. Type: AssertionError
+automatic-speech-recognition,facebook/wav2vec2-base-960h,1,Transpilation to torch Failed. Type: IvyBackendException
+automatic-speech-recognition,openai/whisper-medium,1,Compilation Failed,Terminated
+automatic-speech-recognition,openai/whisper-base,1,Compilation Failed. Type: ValueError
+automatic-speech-recognition,facebook/wav2vec2-base-100k-voxpopuli,1,Transpilation to torch Failed. Type: IvyBackendException
+automatic-speech-recognition,hf-internal-testing/tiny-random-WhisperForConditionalGeneration,1,Model Building Failed
+automatic-speech-recognition,patrickvonplaten/wavlm-libri-clean-100h-base-plus,1,Transpilation to torch Failed. Type: IvyBackendException
+automatic-speech-recognition,openai/whisper-large-v2,1,Building Model Failed,Terminated
+automatic-speech-recognition,openai/whisper-tiny.en,1,Compilation Failed. Type: ValueError
+automatic-speech-recognition,facebook/wav2vec2-large-960h-lv60-self,1,Model Building Failed
+automatic-speech-recognition,openai/whisper-tiny,1,Compilation Failed. Type: ValueError
+automatic-speech-recognition,openai/whisper-small,1,Compilation Failed. Type: ValueError
+automatic-speech-recognition,facebook/s2t-medium-librispeech-asr,1,Model Building Failed
+automatic-speech-recognition,facebook/wav2vec2-base-100h,1,Model Building Failed
+automatic-speech-recognition,openai/whisper-large,1,Model Building Failed,Terminated
+automatic-speech-recognition,facebook/data2vec-audio-base-960h,1,Model Building Failed
+automatic-speech-recognition,joagonzalez/mim-asr-interviews-full-small-no-augmented,1,Compilation Failed. Type: ValueError
+automatic-speech-recognition,facebook/wav2vec2-xlsr-53-espeak-cv-ft,1,Model Building Failed
+automatic-speech-recognition,openai/whisper-base.en,1,Compilation Failed. Type: ValueError
+automatic-speech-recognition,facebook/s2t-small-librispeech-asr,1,Model Building Failed
+automatic-speech-recognition,ybelkada/tiny-wav2vec2-stable-ln,1,Transpilation to torch Failed. Type: IvyBackendException
+automatic-speech-recognition,hf-internal-testing/tiny-random-speech-encoder-decoder,1,Model Building Failed
+automatic-speech-recognition,facebook/mms-1b-all,1,Model Building Failed
+automatic-speech-recognition,openai/whisper-small.en,1,Compilation Failed. Type: ValueError
+automatic-speech-recognition,hf-internal-testing/tiny-random-WavLMForCTC,1,Transpilation to torch Failed. Type: IvyBackendException
+automatic-speech-recognition,facebook/s2t-small-mustc-en-fr-st,1,Model Building Failed
+automatic-speech-recognition,hf-internal-testing/tiny-random-Wav2Vec2ForCTC,1,Transpilation to torch Failed. Type: IvyBackendException
+automatic-speech-recognition,facebook/mms-1b-fl102,1,Model Building Failed
+automatic-speech-recognition,microsoft/speecht5_asr,1,Compilation Failed. Type: RuntimeError
+automatic-speech-recognition,speechbrain/asr-crdnn-rnnlm-librispeech,1,Model Building Failed
+automatic-speech-recognition,dominguesm/stt_pt_quartznet15x5_ctc_small,1,Model Building Failed
+automatic-speech-recognition,nvidia/stt_en_conformer_ctc_large,1,Model Building Failed
+automatic-speech-recognition,facebook/mms-1b-l1107,1,Model Building Failed
+automatic-speech-recognition,speechbrain/asr-transformer-transformerlm-librispeech,1,Model Building Failed
+automatic-speech-recognition,ypluit/stt_kr_citrinet1024_PublicCallCenter_1000H_0.22,1,Model Building Failed
+audio-to-audio,microsoft/speecht5_vc,1,Compilation Failed. Type: RuntimeError
+audio-classification,MIT/ast-finetuned-audioset-10-10-0.4593,1,Compilation Failed. Type: IndexError
+audio-classification,hf-internal-testing/tiny-random-wavlm,1,Transpilation to torch Failed. Type: AssertionError
+voice-activity-detection,pyannote/segmentation,1,Model Building Failed
+text-classification,facebook/bart-large-mnli,1,Model Building Failed
+text-classification,microsoft/deberta-large-mnli,1,"Benchmarking Failed. Type: ValueError
+text-classification,alexandrainst/scandi-nli-large,50,Terminatedtext-classification,cross-encoder/ms-marco-MiniLM-L-6-v2,1,Benchmarking Failed. Error: dtype torch.int64 not understood
+text-classification,rohanrajpal/bert-base-multilingual-codemixed-cased-sentiment,1,Terminated
+text-classification,rohanrajpal/bert-base-multilingual-codemixed-cased-sentiment,50,Terminated
+text-classification,cardiffnlp/twitter-xlm-roberta-base-sentiment,1,Terminated
+text-classification,cardiffnlp/twitter-xlm-roberta-base-sentiment,50,Terminated
+text-classification,finiteautomata/beto-sentiment-analysis,1,Terminated
+text-classification,finiteautomata/beto-sentiment-analysis,50,Terminated
+text-classification,cardiffnlp/twitter-xlm-roberta-base-sentiment,1,Terminated
+text-classification,cardiffnlp/tweet-topic-21-multi,50,"Benchmarking Failed. Error: ufunc 'isfinite' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''"
+text-classification,roberta-base-openai-detector,1,"Benchmarking Failed. Error: ufunc 'isfinite' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''"

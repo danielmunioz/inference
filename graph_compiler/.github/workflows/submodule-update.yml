@@ -1,0 +1,37 @@
+name: Submodule Update
+
+on:
+  workflow_dispatch:
+  schedule:
+    # run at everyday at 00:00 UTC
+    - cron:  '0 0 * * *'
+
+jobs:
+  update_ivy_submodule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️ graph-compiler
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 
+          persist-credentials: false
+          submodules: "recursive"
+
+      - name: Update submodule
+        run: |
+          git submodule update --remote --merge
+
+      - name: Create or update PR
+        uses: peter-evans/create-pull-request@v5
+        with:
+          add-paths: ivy_repo
+          token: ${{ secrets.SUBMODULE_UPDATE_TOKEN }}
+          branch: "submodule-update"
+          title: 'Update ivy submodule'
+          body: 'This PR updates the ivy submodule to the latest version.'
+          commit-message: 'Update submodule'
+          committer: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          base: 'master' # Change to your repo's default branch if not 'main'
+          labels: 'submodule update'
+          # branch-suffix: timestamp
+          delete-branch: true

@@ -1,0 +1,26 @@
+name: multiversion-tests
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 1 * * *"
+jobs:
+  run-nightly-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️ graph-compiler
+        uses: actions/checkout@v3
+        with:
+          path: graph-compiler
+          persist-credentials: false
+          submodules: "recursive"
+
+      - name: Run Tests
+        id: tests
+        run: |
+          cd graph-compiler
+          chmod +x multiversion_testing/run_multiversion_tests.sh
+          multiversion_testing/run_multiversion_tests.sh ${{ github.run_number }}
+      
+      - name: Check on failures
+        if: steps.tests.outcome != 'success'
+        run: exit 1

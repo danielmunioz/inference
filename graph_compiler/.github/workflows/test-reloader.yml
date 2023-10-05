@@ -1,0 +1,18 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  reloader:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout 🛎️ graph-compiler
+        uses: actions/checkout@v2
+        with:
+          path: graph-compiler
+          persist-credentials: false
+          submodules: "recursive"
+
+      - name: Run Tests
+        run: |
+          cd graph-compiler
+          docker run --rm -v `pwd`:/ivy/graph-compiler unifyai/ivy:latest graph-compiler/tests/scripts/test_reloader.sh

@@ -1,0 +1,3 @@
+[submodule "ivy_repo"]
+	path = ivy_repo
+	url = https://github.com/unifyai/ivy.git

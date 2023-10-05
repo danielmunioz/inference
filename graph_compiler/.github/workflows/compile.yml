@@ -1,0 +1,91 @@
+name: compile
+on:
+  workflow_dispatch:
+    inputs:
+      library:
+        description: (optional) Python name of a scraped library to compile
+        type: string
+        required: false
+      scrape-artifact-run-id:
+        description: (optional) Run ID of the scrape artifact to download and compile from
+        type: number
+        required: false
+  schedule:
+    # At 00:00 on every Saturday.
+    - cron: '0 0 * * Sat'
+jobs:
+  looping:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{steps.set-matrix.outputs.result}}
+    steps:
+      - id: set-matrix  # maximum is 256 jobs
+        run: echo "result=[$(seq -s ', ' 1 16)]" >> "$GITHUB_OUTPUT"
+
+  compiling:
+    needs: [looping]
+    runs-on:
+      labels: ubuntu-latest-16-cores
+    strategy:
+      max-parallel: 1  # TODO: parallelize jobs
+      matrix:
+        node: ${{fromJSON(needs.looping.outputs.matrix)}}
+    steps:
+      - name: Checkout 🛎️ graph-compiler
+        uses: actions/checkout@v2
+        with:
+          path: graph-compiler
+          persist-credentials: false
+          submodules: 'recursive'
+
+      - name: Download previous scrape artifact
+        uses: dawidd6/action-download-artifact@v2
+        if: inputs.scrape-artifact-run-id == ''
+        with:
+          github_token: ${{ secrets.IVY_LEAVES_TOKEN }}
+          workflow: scrape.yml
+          workflow_conclusion: ""
+          check_artifacts: true
+          name: scrape-artifacts
+          path: graph-compiler/lib_scraping/scrape/result
+
+      - name: Download specific workflow scrape artifact
+        uses: dawidd6/action-download-artifact@v2
+        if: inputs.scrape-artifact-run-id != ''
+        continue-on-error: true
+        with:
+          github_token: ${{ secrets.IVY_LEAVES_TOKEN }}
+          run_id: ${{ inputs.scrape-artifact-run-id }}
+          name: scrape-artifacts
+          path: graph-compiler/lib_scraping/scrape/result
+
+      - name: Download compile artifacts
+        if: matrix.node != 1
+        uses: actions/download-artifact@v3
+        with:
+          name: compile-artifacts
+          path: graph-compiler/lib_scraping/compile/result
+
+      - name: Compile
+        uses: xoiga123/retry-max@v2.0.1
+        with:
+          max_timeout_minutes: 350 # as job maximum timeout is 360 minutes
+          timeout_minutes: 999
+          max_attempts: 999
+          retry_on: error
+          retry_wait_seconds: 60
+          continue_on_error: true
+          command: |
+            cd "${{github.workspace}}/graph-compiler"
+            if [[ ! -f "lib_scraping/compile/result/all_done" ]]; then
+              docker run --rm -m 28g --init -v `pwd`:/ivy/graph-compiler unifyai/ivy:latest bash /ivy/graph-compiler/lib_scraping/compile/compile.sh ${{ inputs.library }}
+            else
+              echo "Compile is complete, skipping subsequent jobs to complete workflow"
+            fi
+
+      - name: Upload compile artifacts
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: compile-artifacts
+          path: graph-compiler/lib_scraping/compile/result

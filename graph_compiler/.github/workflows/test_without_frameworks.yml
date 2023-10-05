@@ -1,0 +1,37 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  without-all-frameworks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️ graph-compiler
+        uses: actions/checkout@v2
+        with:
+          path: graph-compiler
+          persist-credentials: false
+          submodules: 'recursive'
+
+      - name: only jax
+        run: |
+          cd graph-compiler
+          docker run --rm -v `pwd`:/ivy/graph-compiler unifyai/ivy:latest graph-compiler/tests/scripts/test_only_jax.sh
+
+      - name: only numpy
+        run: |
+          cd graph-compiler
+          docker run --rm -v `pwd`:/ivy/graph-compiler unifyai/ivy:latest graph-compiler/tests/scripts/test_only_numpy.sh
+
+      - name: only paddle
+        run: |
+          cd graph-compiler
+          docker run --rm -v `pwd`:/ivy/graph-compiler unifyai/ivy:latest graph-compiler/tests/scripts/test_only_paddle.sh
+
+      - name: only tensorflow
+        run: |
+          cd graph-compiler
+          docker run --rm -v `pwd`:/ivy/graph-compiler unifyai/ivy:latest graph-compiler/tests/scripts/test_only_tensorflow.sh
+
+      - name: only torch
+        run: |
+          cd graph-compiler
+          docker run --rm -v `pwd`:/ivy/graph-compiler unifyai/ivy:latest graph-compiler/tests/scripts/test_only_torch.sh

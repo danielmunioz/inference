@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteMappingsManager">
+    <list>
+      <list>
+        <remote-mappings server-id="python@docker://unifyai/ivy:latest/python3">
+          <settings>
+            <list>
+              <mapping local-root="$PROJECT_DIR$/ivy_repo/ivy" remote-root="/ivy/ivy" />
+              <mapping local-root="$PROJECT_DIR$/ivy_repo/ivy_tests" remote-root="/ivy/ivy_tests" />
+            </list>
+          </settings>
+        </remote-mappings>
+      </list>
+    </list>
+  </component>
+</project>

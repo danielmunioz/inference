@@ -1,0 +1,2 @@
+task,model_name,batch_size
+conversational,microsoft/DialoGPT-medium,1
